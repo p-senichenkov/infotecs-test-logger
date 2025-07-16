@@ -32,8 +32,8 @@ Application::Application() {
     std::string filename;
     std::cin >> filename;
 
-    std::ofstream ofs{filename};
-    auto writer = std::make_unique<writer::Writer>(std::make_unique<writer::WriteToStream>(ofs));
+    ofs_ = std::ofstream{filename};
+    auto writer = std::make_unique<writer::Writer>(std::make_unique<writer::WriteToStream>(ofs_));
     logger_ = std::make_unique<Logger>(std::move(writer), min_level);
 }
 
@@ -56,6 +56,6 @@ void Application::Run() {
                      level.empty() ? LogLevel::Default : LogLevelFromString(std::move(level)));
     }
 
-    std::cout << "Quitting...";
+    std::cout << "Quitting...\n";
 }
 }  // namespace application
