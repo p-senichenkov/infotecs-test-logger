@@ -9,36 +9,9 @@
 
 namespace test {
 namespace writer {
-inline bool NormalData() {
-    std::ostringstream oss;
-    logger::writer::Writer writer{std::make_unique<logger::writer::WriteToStream>(oss)};
+bool NormalData();
 
-    std::thread writing_thread{&logger::writer::Writer::Run, &writer};
-
-    writer.Write("a");
-    writer.Write("b");
-    writer.Write("c");
-
-    writer.Stop();
-
-    writing_thread.join();
-    return oss.str() == "abc";
-}
-
-inline bool EmptyMessages() {
-    std::ostringstream oss;
-    logger::writer::Writer writer{std::make_unique<logger::writer::WriteToStream>(oss)};
-
-    std::thread writing_thread{&logger::writer::Writer::Run, &writer};
-
-    writer.Write("");
-    writer.Write("");
-
-    writer.Stop();
-
-    writing_thread.join();
-    return oss.str().empty();
-}
+bool EmptyMessages();
 }  // namespace writer
 
 static std::vector<Test> writer_tests{{"Normal data", writer::NormalData},
