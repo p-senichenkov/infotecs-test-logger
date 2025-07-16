@@ -18,6 +18,10 @@ private:
 public:
     Logger() = default;
 
+    ~Logger() {
+        Stop();
+    }
+
     Logger(std::unique_ptr<writer::Writer>&& writer, LogLevel min_level)
         : writer_(std::move(writer)), min_level_(min_level) {
         if (min_level_ == LogLevel::Default) {
@@ -26,6 +30,15 @@ public:
         writing_thread_ = std::thread(&writer::Writer::Run, writer_.get());
     }
 
+    void SetMinLogLevel(LogLevel new_min_lelel) {
+        min_level_ = new_min_lelel;
+    }
+
     void Log(std::string&& msg, LogLevel level = LogLevel::Default);
+
+    void Stop() {
+        writer_->Stop();
+        writing_thread_.join();
+    }
 };
 }  // namespace logger
