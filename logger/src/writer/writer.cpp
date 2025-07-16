@@ -3,7 +3,6 @@
 #include <chrono>
 #include <mutex>
 #include <queue>
-#include <thread>
 
 using namespace std::chrono_literals;
 
