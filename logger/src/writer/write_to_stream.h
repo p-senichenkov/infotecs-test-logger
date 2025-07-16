@@ -7,7 +7,7 @@
 #include "writer/write_strategy.h"
 
 namespace logger::writer {
-// Provides interface to write to any kind of `std::ostream`
+/// @brief Provides interface to write to any kind of @c std::ostream
 class WriteToStream : public WriteStrategy {
 private:
     std::ostream* os_;

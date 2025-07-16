@@ -10,10 +10,12 @@
 #include "writer/write_strategy.h"
 
 namespace logger::writer {
+/// @brief Represents single "writing thread" which handles message queue and can be
+/// instantiated with concrete @c WritingStrategy
 class Writer {
 private:
+    // Period at which Writer wakes up to check if it should stop
     static std::chrono::milliseconds const kWakeUpPeriod;
-    static std::chrono::milliseconds const kWriteTime;
 
     std::unique_ptr<WriteStrategy> write_strategy_;
 
@@ -27,14 +29,15 @@ public:
     Writer(std::unique_ptr<WriteStrategy>&& write_strategy)
         : write_strategy_(std::move(write_strategy)) {}
 
-    ~Writer() {
-        Stop();
-    }
-
+    /// @brief Save message to the queue
     void Write(std::string&& msg);
 
+    /// @brief Start writing saved messages.
+    /// Better call it in a separate thread.
     void Run();
 
+    /// @brief Stop waiting for new messages.
+    /// Writer will be actually stopped when all messages will be written.
     void Stop() {
         run_ = false;
     }

@@ -3,7 +3,7 @@
 #include <string>
 
 namespace logger::writer {
-// Represents different low-level write methods
+/// @brief Represents different low-level @c write methods
 class WriteStrategy {
 public:
     virtual ~WriteStrategy() = default;

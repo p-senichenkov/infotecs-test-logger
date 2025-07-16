@@ -8,7 +8,7 @@
 namespace application {
 std::ostream& AvailibleLevels(std::ostream& os);
 
-// Demo application for Logger library
+/// @brief Demo application for Logger library
 class Application {
 private:
 	std::shared_ptr<logger::Logger> logger_;

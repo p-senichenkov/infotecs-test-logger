@@ -8,6 +8,8 @@
 #include "writer/writer.h"
 
 namespace logger {
+/// @brief The logger itself.
+/// It is paramethrized with concrete Writer.
 class Logger {
 private:
     std::unique_ptr<writer::Writer> writer_;
@@ -36,6 +38,9 @@ public:
 
     void Log(std::string&& msg, LogLevel level = LogLevel::Default);
 
+	/// @brief Stop receiving messages.
+	/// Logger actually stops after all messages are flushed.
+	/// Destructor acts the same way.
     void Stop() {
         writer_->Stop();
         writing_thread_.join();

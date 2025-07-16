@@ -1,7 +1,6 @@
 #include "writer/writer.h"
 
 #include <chrono>
-#include <iostream>
 #include <mutex>
 #include <queue>
 #include <thread>
@@ -9,10 +8,7 @@
 using namespace std::chrono_literals;
 
 namespace logger::writer {
-// Period at which Writer wakes up to check if it should stop
 std::chrono::milliseconds const Writer::kWakeUpPeriod = 250ms;
-// Time Writer sleeps after each write to allow pushing new messages to the queue
-std::chrono::milliseconds const Writer::kWriteTime = 50ms;
 
 void Writer::Write(std::string&& msg) {
     {
@@ -34,10 +30,9 @@ void Writer::Run() {
         }
 
         auto msg = queue_.front();
-        write_strategy_->Write(msg);
         queue_.pop();
         lk.unlock();
-        std::this_thread::sleep_for(kWriteTime);
+        write_strategy_->Write(msg);
         lk.lock();
     }
 }
