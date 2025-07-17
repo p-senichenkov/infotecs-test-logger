@@ -6,7 +6,7 @@ Consists of two parts: logger and demo application.
 ## Building
 
 Logger is considered to be built with CMake.
-It's recommended to use a separate build directory ('build' in this README).
+It's recommended to use a separate build directory (`build` in this README).
 Personally, I prefer Ninja as a build tool, so all instruction assume that Ninja is used.
 
 ```sh
