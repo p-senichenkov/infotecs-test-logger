@@ -1,5 +1,10 @@
 #include "writer_tests.h"
 
+#include <thread>
+
+#include "writer/write_to_stream.h"
+#include "writer/writer.h"
+
 namespace test::writer {
 using namespace logger;
 using namespace logger::writer;

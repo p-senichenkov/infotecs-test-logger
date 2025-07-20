@@ -1,11 +1,6 @@
 #pragma once
 
-#include <sstream>
-#include <thread>
-
 #include "test.h"
-#include "writer/write_to_stream.h"
-#include "writer/writer.h"
 
 namespace test {
 namespace writer {
