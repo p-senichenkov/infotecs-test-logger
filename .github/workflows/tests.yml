@@ -1,0 +1,16 @@
+name: System tests
+
+on:
+  push
+
+jobs:
+  library-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Debug -D TESTS=ON
+          cmake --build build
+      - name: Run tests
+        run: build/target/LoggerTests
