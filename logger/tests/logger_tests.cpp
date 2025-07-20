@@ -49,7 +49,7 @@ bool LoggerTest(LogLevel default_lvl, std::vector<MsgDescription> const& msgs) {
             lvl = default_lvl;
         }
         if (str != '(' + LogLevelToString(lvl) + ')') {
-            std::cout << "Wrong log level: " << LogLevelToString(lvl) << '\n';
+            std::cout << "Wrong log level: " << str << '\n';
             return false;
         }
 

@@ -1,5 +1,6 @@
 #include "writer_tests.h"
 
+#include <sstream>
 #include <thread>
 
 #include "writer/write_to_stream.h"

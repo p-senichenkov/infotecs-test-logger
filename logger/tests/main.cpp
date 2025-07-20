@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "logger_tests.h"
+#include "socket_tests.h"
 #include "test.h"
 #include "writer_tests.h"
 
@@ -29,6 +30,9 @@ int main() {
 
     std::cout << "* Logger tests *\n";
     failed_tests += RunTests(logger_tests);
+
+    std::cout << "* Socket tests *\n";
+    failed_tests += RunTests(socket_tests);
 
     if (failed_tests) {
         std::cout << failed_tests << " tests failed\n";

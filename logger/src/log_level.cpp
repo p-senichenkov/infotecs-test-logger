@@ -16,6 +16,8 @@ std::string LogLevelToString(LogLevel level) {
             return "WARN";
         case LogLevel::Error:
             return "ERROR";
+		default:
+			throw std::logic_error("Unknown log level");
     }
 }
 
