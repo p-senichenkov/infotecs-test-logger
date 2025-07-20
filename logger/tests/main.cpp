@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "logger_tests.h"
 #include "test.h"
 #include "writer_tests.h"
 
@@ -8,7 +9,7 @@ using namespace test;
 unsigned RunTests(std::vector<Test> const& tests) {
     unsigned failed_tests = 0;
 
-    for (Test const& test : writer_tests) {
+    for (Test const& test : tests) {
         std::cout << test.name << ": RUN...\n";
         auto result = test.body();
         std::cout << '\t' << (result ? "SUCCESS" : "FAIL") << '\n';
@@ -25,6 +26,9 @@ int main() {
 
     std::cout << "* Writer tests *\n";
     failed_tests += RunTests(writer_tests);
+
+    std::cout << "* Logger tests *\n";
+    failed_tests += RunTests(logger_tests);
 
     if (failed_tests) {
         std::cout << failed_tests << " tests failed\n";
