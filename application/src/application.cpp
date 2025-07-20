@@ -52,8 +52,12 @@ void Application::Run() {
         if (msg == std::string("q")) {
             break;
         }
-        logger_->Log(std::move(msg),
-                     level.empty() ? LogLevel::Default : LogLevelFromString(std::move(level)));
+
+        if (level.empty()) {
+            logger_->Log(msg);
+        } else {
+            logger_->Log(msg, LogLevelFromString(std::move(level)));
+        }
     }
 
     std::cout << "Quitting...\n";

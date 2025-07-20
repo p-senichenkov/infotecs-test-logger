@@ -10,7 +10,7 @@
 #include "log_level.h"
 
 namespace logger {
-void Logger::Log(std::string&& msg, LogLevel level) {
+void Logger::Log(std::string const& msg, LogLevel level) {
     if (level == LogLevel::Default) {
         level = min_level_;
     } else if (static_cast<unsigned char>(level) < static_cast<unsigned char>(min_level_)) {

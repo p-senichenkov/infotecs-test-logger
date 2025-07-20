@@ -39,7 +39,7 @@ public:
         min_level_ = new_min_lelel;
     }
 
-    void Log(std::string&& msg, LogLevel level = LogLevel::Default);
+    void Log(std::string const& msg, LogLevel level = LogLevel::Default);
 
     /// @brief Stop receiving messages.
     /// Logger actually stops after all messages are flushed.
