@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <thread>
 
@@ -16,6 +17,8 @@ private:
     LogLevel min_level_;
 
     std::thread writing_thread_;
+
+    bool stopped_ = false;
 
 public:
     Logger() = default;
@@ -38,12 +41,20 @@ public:
 
     void Log(std::string&& msg, LogLevel level = LogLevel::Default);
 
-	/// @brief Stop receiving messages.
-	/// Logger actually stops after all messages are flushed.
-	/// Destructor acts the same way.
+    /// @brief Stop receiving messages.
+    /// Logger actually stops after all messages are flushed.
+    /// Destructor acts the same way.
     void Stop() {
+        if (stopped_) {
+            return;
+        }
+
         writer_->Stop();
+        if (!writing_thread_.joinable()) {
+            throw std::logic_error("Writing thread is not joinable.");
+        }
         writing_thread_.join();
+        stopped_ = true;
     }
 };
 }  // namespace logger

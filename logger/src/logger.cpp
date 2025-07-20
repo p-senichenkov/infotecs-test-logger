@@ -11,11 +11,9 @@
 
 namespace logger {
 void Logger::Log(std::string&& msg, LogLevel level) {
-	std::cout << "Logging message " << msg << "...\n";
-
-	if (level == LogLevel::Default) {
-		level = min_level_;
-	} else if (static_cast<unsigned char>(level) < static_cast<unsigned char>(min_level_)) {
+    if (level == LogLevel::Default) {
+        level = min_level_;
+    } else if (static_cast<unsigned char>(level) < static_cast<unsigned char>(min_level_)) {
         return;
     }
 
